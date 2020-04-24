@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://entities/weapons/pistol/pistol_bullet/pistol_bullet.gd" type="Script" id=1]
+[ext_resource path="res://particle_effects/smoke/smoke.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/weapons/pistol/pistol_bullet/bullet.png" type="Texture" id=3]
+[ext_resource path="res://entities/weapons/pistol/pistol_bullet/assets/smoke_particle.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 5.07317
+height = 29.8537
+
+[node name="pistol_bullet" type="KinematicBody2D"]
+
+input/pickable = true
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+on_impact_particle = ExtResource( 2 )
+DAMAGE = 25
+
+[node name="sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="."]
+
+transform/pos = Vector2( -1272, -1056 )
+transform/scale = Vector2( 4.648, 4.272 )
+rect = Rect2( 0, 0, 500, 500 )
+
+[node name="collision_box" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1.57692, 0, 0, 1, 0, 4 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="trigger" type="CollisionShape2D" parent="collision_box"]
+
+transform/pos = Vector2( 0, 4 )
+transform/scale = Vector2( 1.57692, 1 )
+shape = SubResource( 1 )
+trigger = true
+_update_shape_index = 0
+
+[node name="smoke_trail" type="Particles2D" parent="."]
+
+config/amount = 6
+config/lifetime = 0.2
+config/process_mode = 1
+config/local_space = false
+config/texture = ExtResource( 4 )
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.1
+params/final_size = 0.2
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+
+[connection signal="exit_screen" from="visibility_notifier_2d" to="." method="_on_visibility_notifier_2d_exit_screen"]
+
+[connection signal="body_enter" from="collision_box" to="." method="_on_pistol_bullet_body_enter"]
+
+

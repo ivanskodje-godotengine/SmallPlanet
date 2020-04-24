@@ -1,0 +1,229 @@
+[gd_scene load_steps=18 format=1]
+
+[ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://fonts/black_metal_sans/BlackMetalSans.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://player/assets/body_parts/foot.png" type="Texture" id=3]
+[ext_resource path="res://player/assets/body_parts/body.png" type="Texture" id=4]
+[ext_resource path="res://player/assets/body_parts/head.png" type="Texture" id=5]
+[ext_resource path="res://player/assets/body_parts/wing_behind.png" type="Texture" id=6]
+[ext_resource path="res://player/scripts/wing.gd" type="Script" id=7]
+[ext_resource path="res://entities/weapons/pistol/pistol.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player/assets/animations/crouch.tres" type="Animation" id=9]
+[ext_resource path="res://player/assets/animations/idle.tres" type="Animation" id=10]
+[ext_resource path="res://player/assets/animations/jump.tres" type="Animation" id=11]
+[ext_resource path="res://player/assets/animations/walk.tres" type="Animation" id=12]
+[ext_resource path="res://entities/generic_bar/generic_bar.tscn" type="PackedScene" id=13]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 12.4659
+height = 12.1931
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 16.2572
+height = 21.9989
+
+[sub_resource type="DynamicFont" id=3]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 2 )
+
+[sub_resource type="CircleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 5.66937
+
+[node name="player" type="RigidBody2D" groups=[
+"player",
+]]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 0.913532, 0.406766, -0.406766, 0.913532, 35.0618, -18.858 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 0.304754, 0.952431, -0.952431, 0.304754, 5.59439, 0.174824 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 2 )
+shapes/2/transform = Matrix32( 0.884063, -0.467367, 0.467367, 0.884063, -7.69228, 6.29369 )
+shapes/2/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 2
+mass = 10.0
+friction = 0.2
+bounce = 0.0
+gravity_scale = 10.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+max_health = 100
+current_health = 100
+
+[node name="camera" type="Camera2D" parent="."]
+
+transform/pos = Vector2( 3.91888, 7.48856 )
+anchor_mode = 1
+rotating = true
+current = true
+zoom = Vector2( 1.4, 1.4 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = true
+smoothing/speed = 10.0
+drag_margin/left = 0.0
+drag_margin/top = 0.2
+drag_margin/right = -0.2
+drag_margin/bottom = 0.2
+
+[node name="debug" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -28.0
+margin/top = -192.0
+margin/right = 12.0
+margin/bottom = -115.0
+custom_fonts/font = SubResource( 3 )
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="body_parts" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/scale = Vector2( 0.2, 0.2 )
+
+[node name="right_foot" type="Sprite" parent="body_parts"]
+
+transform/pos = Vector2( -4.06192, 79.1419 )
+transform/rot = -30.3011
+texture = ExtResource( 3 )
+offset = Vector2( 12, 38 )
+
+[node name="left_foot" type="Sprite" parent="body_parts"]
+
+transform/pos = Vector2( 0.389709, 79.065 )
+transform/rot = 17.2067
+texture = ExtResource( 3 )
+offset = Vector2( 12, 38 )
+
+[node name="upper_body" type="Node2D" parent="body_parts"]
+
+[node name="body" type="Sprite" parent="body_parts/upper_body"]
+
+editor/display_folded = true
+transform/pos = Vector2( 1.36047, 1.36035 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -10 )
+
+[node name="head" type="Sprite" parent="body_parts/upper_body/body"]
+
+transform/pos = Vector2( 149.377, -37.6796 )
+texture = ExtResource( 5 )
+offset = Vector2( 50, -80 )
+
+[node name="wing" type="Sprite" parent="body_parts/upper_body"]
+
+transform/pos = Vector2( 75.7166, -13.933 )
+z/z = 1
+z/relative = false
+texture = ExtResource( 6 )
+offset = Vector2( -17, -60 )
+script/script = ExtResource( 7 )
+player_path = NodePath("../../..")
+
+[node name="weapon" type="Position2D" parent="body_parts/upper_body/wing"]
+
+transform/pos = Vector2( -16.458, -94.6935 )
+
+[node name="pistol" parent="body_parts/upper_body/wing/weapon" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -1.52588e-05, 0 )
+z/relative = false
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/crouch = ExtResource( 9 )
+anims/idle = ExtResource( 10 )
+anims/jump = ExtResource( 11 )
+anims/walk = ExtResource( 12 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="ground_checker" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 32 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="trigger" type="CollisionShape2D" parent="ground_checker"]
+
+transform/pos = Vector2( 0, 32 )
+shape = SubResource( 4 )
+trigger = true
+_update_shape_index = 0
+
+[node name="head_collision" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 35.0618, -18.858 )
+transform/rot = -24.0019
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="body_collision" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 5.59439, 0.174824 )
+transform/rot = -72.2566
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 1
+
+[node name="body_collision2" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( -7.69228, 6.29369 )
+transform/rot = 27.8635
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 2
+
+[node name="health_bar" parent="." instance=ExtResource( 13 )]
+
+transform/pos = Vector2( 5.31485, -108.342 )
+transform/scale = Vector2( 0.4, 0.4 )
+
+[connection signal="body_enter" from="ground_checker" to="." method="_on_ground_checker_body_enter"]
+
+[connection signal="body_exit" from="ground_checker" to="." method="_on_ground_checker_body_exit"]
+
+

@@ -1,0 +1,156 @@
+[gd_scene load_steps=14 format=1]
+
+[ext_resource path="res://planets/planet.gd" type="Script" id=1]
+[ext_resource path="res://planets/planet_01/assets/atmosphere.png" type="Texture" id=2]
+[ext_resource path="res://planets/planet_01/assets/planet_surrounding_30.png" type="Texture" id=3]
+[ext_resource path="res://planets/planet_01/assets/planet_surrounding.png" type="Texture" id=4]
+[ext_resource path="res://planets/planet_01/assets/planet.png" type="Texture" id=5]
+[ext_resource path="res://entities/world_objects/platforms/platform_01/platform_01.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 489.38, 578.524, 449.152, 623.951, 390.868, 666.955, 313.248, 694.818, 264.155, 706.096, 538.147, 520.339 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 614.44, 427.46, 580.606, 471.909, 538.147, 520.339, 264.155, 706.096, 209.649, 720.941, 630.362, 402.25 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 630.362, 402.25, 209.649, 720.941, 138.769, 744.575, 80.3878, 755.189, 8.7771, 759.821, -62.9108, 753.199, -137.019, 737.83 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 609.757, -461.37, 640.314, -418.399, 692.06, -322.867, 724.465, -251.865, 735.846, -172.934, 745.797, -78.7286, 748.472, 38.9848, 741.242, 133.404, 715.28, 231.752, 695.281, 304.846, 664.197, 355.811, 630.362, 402.25, -137.019, 737.83, -214.503, 724.096, -288.473, 694.155, -354.804, 660.087, -424.637, 616.717, -488.59, 568.936, -539.311, 529.241, -591.503, 480.725, -632.788, 422.816, -683.208, 338.562, -725.147, 243.574, -749.55, 130.912, -760.165, 42.6771, -756.819, -49.517, -749.819, -138.517, -732.692, -242.033, 584.553, -487.26 )
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 504.133, -575.908, 546.187, -537.513, 584.553, -487.26, -732.692, -242.033, 458.686, -608.16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=14]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -699.793, -337.462, -671.93, -385.228, -610.232, -484.741, -560.567, -548.722, -491.48, -610.791, -390.64, -680.45, -342.874, -708.314, -273.215, -738.831, -221.303, -756.299, -169.721, -767.358, -104.089, -778.79, -33.6978, -786.126, 65.7706, -785.246, 162.12, -764.714, 265.2, -728.26, 336.528, -694.218, 402.992, -647.747, 458.686, -608.16, -732.692, -242.033, -721.003, -291.44 )
+
+[sub_resource type="CircleShape2D" id=8]
+
+custom_solver_bias = 0.0
+radius = 1986.29
+
+[node name="planet" type="StaticBody2D" groups=[
+"solid",
+]]
+
+input/pickable = false
+shapes/0/shape = SubResource( 9 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 10 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 11 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 12 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 13 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 14 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+script/script = ExtResource( 1 )
+is_start_planet = false
+sphere_1_rotation_deg = 0.5
+sphere_2_rotation_deg = 0.5
+
+[node name="sphere_3 2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, -3 )
+transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="sphere_1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, -3 )
+transform/scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+
+[node name="sphere_2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, -3 )
+transform/scale = Vector2( 1.8, 1.8 )
+texture = ExtResource( 4 )
+
+[node name="planet" type="Sprite" parent="."]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, -13 )
+
+[node name="objects" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="platform_set_1" type="Node2D" parent="objects"]
+
+[node name="platform_1" parent="objects/platform_set_1" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( -5.57898, -930.143 )
+transform/scale = Vector2( 1, 0.5 )
+friction = 1.0
+
+[node name="platform_2" parent="objects/platform_set_1" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 680.335, -638.125 )
+transform/rot = -44.0025
+friction = 1.0
+
+[node name="platform_3" parent="objects/platform_set_1" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( -702.059, -610.501 )
+transform/rot = 46.4083
+friction = 1.0
+
+[node name="gravity_area" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 8 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+space_override = 3
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 490.0
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="trigger" type="CollisionShape2D" parent="gravity_area"]
+
+shape = SubResource( 8 )
+trigger = true
+_update_shape_index = 0
+
+[node name="collision" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( 65.7706, -785.246, 162.12, -764.714, 265.2, -728.26, 336.528, -694.218, 402.992, -647.747, 458.686, -608.16, 504.133, -575.908, 546.187, -537.513, 584.553, -487.26, 609.757, -461.37, 640.314, -418.399, 692.06, -322.867, 724.465, -251.865, 735.846, -172.934, 745.797, -78.7286, 748.472, 38.9848, 741.242, 133.404, 715.28, 231.752, 695.281, 304.846, 664.197, 355.811, 630.362, 402.25, 614.44, 427.46, 580.606, 471.909, 538.147, 520.339, 489.38, 578.524, 449.152, 623.951, 390.868, 666.955, 313.248, 694.818, 264.155, 706.096, 209.649, 720.941, 138.769, 744.575, 80.3878, 755.189, 8.7771, 759.821, -62.9108, 753.199, -137.019, 737.83, -214.503, 724.096, -288.473, 694.155, -354.804, 660.087, -424.637, 616.717, -488.59, 568.936, -539.311, 529.241, -591.503, 480.725, -632.788, 422.816, -683.208, 338.562, -725.147, 243.574, -749.55, 130.912, -760.165, 42.6771, -756.819, -49.517, -749.819, -138.517, -732.692, -242.033, -721.003, -291.44, -699.793, -337.462, -671.93, -385.228, -610.232, -484.741, -560.567, -548.722, -491.48, -610.791, -390.64, -680.45, -342.874, -708.314, -273.215, -738.831, -221.303, -756.299, -169.721, -767.358, -104.089, -778.79, -33.6978, -786.126 )
+shape_range = Vector2( 0, 5 )
+trigger = false
+
+[connection signal="body_enter" from="gravity_area" to="." method="_on_gravity_area_body_enter"]
+
+[connection signal="body_exit" from="gravity_area" to="." method="_on_gravity_area_body_exit"]
+
+

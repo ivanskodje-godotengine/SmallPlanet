@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://entities/generic_bar/generic_bar.gd" type="Script" id=1]
+[ext_resource path="res://entities/generic_bar/bars/bar_01.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/generic_bar/bars/bar_02.tscn" type="PackedScene" id=3]
+
+[node name="generic_bar" type="Node2D"]
+
+script/script = ExtResource( 1 )
+bar_01 = ExtResource( 2 )
+bar_02 = ExtResource( 3 )
+current_bar = "bar_01"
+max_value = 100
+current_value = 100
+show_text = true
+show_percentage = true
+bar_color = Color( 1, 0, 0, 1 )
+bar_background_color = Color( 0.27, 0.26, 0.32, 1 )
+text_color = Color( 1, 1, 1, 1 )
+
+

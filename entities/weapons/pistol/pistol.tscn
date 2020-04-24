@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://entities/weapons/pistol/pistol.gd" type="Script" id=1]
+[ext_resource path="res://entities/weapons/pistol/pistol_bullet/pistol_bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://particle_effects/barrel_smoke/barrel_smoke.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/weapons/pistol/pistol.png" type="Texture" id=4]
+
+[node name="pistol" type="Node2D"]
+
+transform/scale = Vector2( 0.5, 0.5 )
+script/script = ExtResource( 1 )
+bullet = ExtResource( 2 )
+barrel_smoke_particle = ExtResource( 3 )
+bullet_speed = 25
+bullet_delay = 0.3
+
+[node name="sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 4 )
+offset = Vector2( -50, -130 )
+
+[node name="barrel_exit" type="Position2D" parent="."]
+
+transform/pos = Vector2( -136, -404 )
+
+
